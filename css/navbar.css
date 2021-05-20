@@ -1,0 +1,203 @@
+label {
+  cursor: pointer;
+}
+
+.current-page {
+  font-weight: 600;
+}
+
+header {
+  background: hsl(var(--hue) 100% var(--light));
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.16), 0 2px 10px hsla(0, 0%, 0%, 0.12);
+}
+
+header .logo {
+  display: inline-flex;
+}
+
+header .logo a {
+  display: inline-block;
+  margin: 0.4em auto;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* this is tabbable */
+.nav-toggle {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.nav-toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 1em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: white;
+  height: 3px;
+  width: 2em;
+  border-radius: 10px;
+  position: relative;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: "";
+  position: absolute;
+}
+
+.nav-toggle-label span::before {
+  bottom: 8px;
+}
+
+.nav-toggle-label span::after {
+  top: 8px;
+}
+
+/* hamburger animation */
+.nav-toggle:checked ~ .nav-toggle-label span,
+.nav-toggle:checked ~ .nav-toggle-label span::before,
+.nav-toggle:checked ~ .nav-toggle-label span::after {
+  transition: background-color 0.25s linear, transform 0.25s linear;
+}
+
+.nav-toggle ~ .nav-toggle-label span,
+.nav-toggle ~ .nav-toggle-label span::before,
+.nav-toggle ~ .nav-toggle-label span::after {
+  transition: background-color 0.25s linear, transform 0.25s linear;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span {
+  background-color: transparent;
+}
+.nav-toggle:checked ~ .nav-toggle-label span::before {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle:checked ~ .nav-toggle-label span::after {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* end hamburger animation */
+
+nav {
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  left: 0;
+  background: hsl(var(--hue) 100% var(--light));
+  width: 100%;
+  transform: scale(1, 0);
+  transform-origin: top;
+  transition: transform 400ms ease-in-out;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav li {
+  margin: 0 0 1em 1em;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover,
+nav a:focus {
+  color: black;
+}
+
+.nav-toggle:checked ~ nav {
+  transform: scale(1, 1);
+}
+
+.nav-toggle:checked ~ nav a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 1000px) {
+  .nav-toggle-label {
+    display: none;
+  }
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(auto, 3fr) 1fr; /* 1fr is leftoverspace */
+  }
+
+  .logo {
+    grid-column: 2 / 3; /* logo in between column 2 and 3 */
+  }
+
+  nav {
+    /*all: unset;  won't work in Edge or IE... */
+
+    /* Edge support stuff */
+    position: relative;
+    text-align: left;
+    transition: none;
+    transform: scale(1, 1);
+    background: none;
+    top: initial;
+    left: initial;
+    /* end Edge support stuff */
+
+    grid-column: 3 / 4; /* logo in between column 3 and 4 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  nav ul {
+    display: flex;
+    margin-right: 1em;
+  }
+
+  nav li {
+    margin: 0 0 0 3em;
+  }
+
+  nav a {
+    opacity: 1;
+    position: relative;
+  }
+
+  nav a::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background: black;
+    position: absolute;
+    bottom: -0.75em;
+    left: 0;
+    right: 0;
+    transform: scale(0, 1); /* changing the width */
+    transform-origin: left;
+    transition: transform ease-in-out 250ms;
+  }
+
+  nav a:hover::before,
+  nav a:focus::before {
+    transform: scale(1, 1);
+  }
+}
