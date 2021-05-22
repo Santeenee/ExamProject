@@ -103,8 +103,8 @@ article {
 
 .centered h2 span {
   display: inline-flex;
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 .container {
@@ -147,21 +147,21 @@ article {
 
 #add {
   display: inline-block;
+  background-image: var(--plus);
   width: 15px;
   height: 15px;
-  margin-right: 10px;
 
-  background-image: var(--plus);
   background-size: contain;
   transition: 400ms;
 }
 
 #sub {
   display: inline-block;
+  background-image: var(--minus);
   width: 15px;
   height: 15px;
+  margin-right: 10px;
 
-  background-image: var(--minus);
   background-size: contain;
   transition: 400ms;
 }

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/navbar.css" />
 
+    <script defer src="app.js"></script>
+
     <title>Menu</title>
 </head>
 
@@ -51,7 +53,7 @@
                         <div class="image">
                             <img src="assets/primi.jpg">
                         </div>
-                        <div class="dish-group">Primi</div>
+                        <div class="dish-group"><span>Primi</span></div>
                     </a>
                 </div>
 
@@ -60,7 +62,7 @@
                         <div class="image">
                             <img src="assets/secondi.jpg">
                         </div>
-                        <div class="dish-group">Secondi</div>
+                        <div class="dish-group"><span>Secondi</span></div>
                     </a>
                 </div>
 
@@ -69,7 +71,7 @@
                         <div class="image">
                             <img src="assets/dessert.jpg">
                         </div>
-                        <div class="dish-group">Dessert</div>
+                        <div class="dish-group"><span>Dessert</span></div>
                     </a>
                 </div>
             </div>

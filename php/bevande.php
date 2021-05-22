@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/footer.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
 
+    <script defer src="../app.js"></script>
+
     <title>Bevande</title>
 </head>
 
@@ -42,8 +44,8 @@
                         </div>
                         <div class="dish-group"><span>Vino</span>
                             <div>
-                                <button id="add"></button>
                                 <button id="sub"></button>
+                                <button id="add"></button>
                             </div>
                         </div>
                     </a>
