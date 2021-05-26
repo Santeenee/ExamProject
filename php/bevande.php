@@ -34,9 +34,9 @@
 
     <main>
         <a href="../index.php" class="betweenPages torna-home">torna alla home</a>
-        <input type="hidden" name="pagina" value="bevande">
 
         <form action="formAction.php" method="post">
+            <input type="hidden" name="pagina" value="bevande">
 
             <?php
             include_once('partials/dbconnection.php');
@@ -51,21 +51,24 @@
                 $piatto = $row['nomePiatto'];
                 $prezzo = $row['prezzo'];
 
-                //*CONTAINER
+                //*CONTAINERS
                 echo "<!-- " . strtoupper($piatto) . " -->";
                 echo '<div class="container bevande">';
-                echo '<div class="image"><img src="../assets/' . $piatto . '.jpg"></div>';
+                //echo '<div class="image"><img src="../assets/' . $piatto . '.jpg"></div>';
                 echo '<div class="containerCounter">
                         <a class="counter" name="' . $piatto . '">0</a>
                         <span>di ' . ucfirst($piatto) . '</span>
                       </div>';
-                echo '<div class="flexJustifyCenter"><p class="prezzo">0</p><p class="prezzoInit">' . $prezzo . '</p></div>';
-                echo '<div class="dish-group"><div class="sub"><span></span></div><div class="add"><span></span></div></div>';
+                echo '<div class="flexJustifyCenter">
+                        <p class="prezzo">0</p>
+                        <p class="prezzoInit">' . $prezzo . '</p>
+                      </div>';
+                echo '<div class="dish-group">
+                        <div class="sub"><span></span></div>
+                        <div class="add"><span></span></div>
+                      </div>';
                 echo '</div>';
             }
-
-
-
 
             ?>
 
@@ -87,7 +90,6 @@
                 </div>
 
             </div> -->
-
 
             <div class="flexJustifyCenter">
                 <button type="submit" class="betweenPages avanti">avanti</button>

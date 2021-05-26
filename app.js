@@ -10,7 +10,7 @@ let count = [];
 // it works ONLY if there is an equal number of add and sub buttons (and counters)
 for (let i = 0; i < sub.length; i++) {
   count[i] = 0;
-  //initValuePrezzo += prezzoSpan[i].innerHTML;
+  let prezzoAlMezzoLitro = parseFloat(prezzoAlLitro[i].innerHTML) / 2;
 
   let dishName = counterSpan[i].name;
   let hiddenTag = `<input type="hidden" name="${dishName}" class="hidden-input${i}" value="0">`;
@@ -29,8 +29,7 @@ for (let i = 0; i < sub.length; i++) {
     hiddenInput.value = count[i];
     if (prezzoSpan[i].innerHTML > 0) {
       prezzoSpan[i].innerHTML =
-        parseInt(prezzoSpan[i].innerHTML) -
-        parseInt(prezzoAlLitro[i].innerHTML) / 2;
+        parseFloat(prezzoSpan[i].innerHTML) - parseFloat(prezzoAlMezzoLitro);
     }
   });
 
@@ -41,8 +40,7 @@ for (let i = 0; i < sub.length; i++) {
     counterSpan[i].innerHTML = count[i];
     hiddenInput.value = count[i];
     prezzoSpan[i].innerHTML =
-      parseInt(prezzoSpan[i].innerHTML) +
-      parseInt(prezzoAlLitro[i].innerHTML) / 2;
+      parseFloat(prezzoSpan[i].innerHTML) + parseFloat(prezzoAlMezzoLitro);
   });
 }
 

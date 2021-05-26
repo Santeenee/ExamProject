@@ -33,50 +33,46 @@
     </header>
 
     <main>
-        <article>
 
-            <div class="centered">
 
-                <h2><span>Menu</span></h2>
+        <h2><span>Menu</span></h2>
 
-                <div class="container">
-                    <a href="php/bevande.php">
-                        <div class="image">
-                            <img src="assets/bevande.jpg">
-                        </div>
-                        <div class="dish-group"><span>Bevande</span></div>
-                    </a>
+        <div class="container">
+            <a href="php/bevande.php">
+                <div class="image">
+                    <img src="assets/bevande.jpg">
                 </div>
+                <div class="containerCounter"><span>Bevande</span></div>
+            </a>
+        </div>
 
-                <div class="container">
-                    <a href="php/primi.php">
-                        <div class="image">
-                            <img src="assets/primi.jpg">
-                        </div>
-                        <div class="dish-group"><span>Primi</span></div>
-                    </a>
+        <div class="container">
+            <a href="php/primi.php">
+                <div class="image">
+                    <img src="assets/primi.jpg">
                 </div>
+                <div class="containerCounter"><span>Primi</span></div>
+            </a>
+        </div>
 
-                <div class="container">
-                    <a href="php/secondi.php">
-                        <div class="image">
-                            <img src="assets/secondi.jpg">
-                        </div>
-                        <div class="dish-group"><span>Secondi</span></div>
-                    </a>
+        <div class="container">
+            <a href="php/secondi.php">
+                <div class="image">
+                    <img src="assets/secondi.jpg">
                 </div>
+                <div class="containerCounter"><span>Secondi</span></div>
+            </a>
+        </div>
 
-                <div class="container">
-                    <a href="php/dessert.php">
-                        <div class="image">
-                            <img src="assets/dessert.jpg">
-                        </div>
-                        <div class="dish-group"><span>Dessert</span></div>
-                    </a>
+        <div class="container">
+            <a href="php/dessert.php">
+                <div class="image">
+                    <img src="assets/dessert.jpg">
                 </div>
-            </div>
+                <div class="containerCounter"><span>Dessert</span></div>
+            </a>
+        </div>
 
-        </article>
     </main>
 
     <?php include('php/partials/footer.php'); ?>

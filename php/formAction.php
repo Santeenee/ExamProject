@@ -15,29 +15,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $piatto = $row['nomePiatto'];
 
-        //CONSOLE LOGGING THE VALUES
+        //printing dish numbers
         echo "<script>console.log('" . $piatto . " n:" . $_POST[$piatto] . "')</script>";
+
+        //*store data
+        if (!isset($arrData)) {
+            $arrData = [];
+        }
+        $arrData[] = $piatto; //push
     }
-    /*
+
+
+
+
+    //*redirect
+    function redirect($url)
+    {
+        echo '<script>window.location.replace("' . $url . '");</script>';
+    }
+
     switch ($_POST["pagina"]) {
         case 'bevande':
-
-
+            redirect('primi.php');
             break;
+
         case 'primi':
-            # code...
+            redirect('secondi.php');
             break;
+
         case 'secondi':
-            # code...
+            redirect('dessert.php');
             break;
+
         case 'dessert':
-            # code...
+            redirect('order.php');
             break;
 
         default:
-            # code...
+
+            redirect('../index.php');
             break;
-    }*/
+    }
 
     $conn->close();
 }
