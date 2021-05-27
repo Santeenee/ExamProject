@@ -37,7 +37,7 @@
 
         <h2><span>Menu</span></h2>
 
-        <div class="container">
+        <div class="card">
             <a href="php/bevande.php">
                 <div class="image">
                     <img src="assets/bevande.jpg">
@@ -46,7 +46,7 @@
             </a>
         </div>
 
-        <div class="container">
+        <div class="card">
             <a href="php/primi.php">
                 <div class="image">
                     <img src="assets/primi.jpg">
@@ -55,7 +55,7 @@
             </a>
         </div>
 
-        <div class="container">
+        <div class="card">
             <a href="php/secondi.php">
                 <div class="image">
                     <img src="assets/secondi.jpg">
@@ -64,7 +64,7 @@
             </a>
         </div>
 
-        <div class="container">
+        <div class="card">
             <a href="php/dessert.php">
                 <div class="image">
                     <img src="assets/dessert.jpg">

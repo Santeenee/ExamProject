@@ -41,23 +41,25 @@
             <?php
             include_once('partials/dbconnection.php');
 
-            $sql = "SELECT DISTINCT nomePiatto, prezzo FROM piatto ORDER BY nomePiatto DESC";
+            $sql = "SELECT DISTINCT replace(nomePiatto,' ', '_') as piatto, tipo, prezzo 
+            FROM piatto 
+            WHERE tipo = 'bevande'";
 
             if (!($result = $conn->query($sql))) {
                 die("<script>alert('query non riuscita')</script>");
             }
 
             while ($row = $result->fetch_assoc()) {
-                $piatto = $row['nomePiatto'];
+                $piatto = $row['piatto'];
                 $prezzo = $row['prezzo'];
 
-                //*CONTAINERS
+                //*CARDS
                 echo "<!-- " . strtoupper($piatto) . " -->";
-                echo '<div class="container bevande">';
+                echo '<div class="card bevande">';
                 //echo '<div class="image"><img src="../assets/' . $piatto . '.jpg"></div>';
                 echo '<div class="containerCounter">
                         <a class="counter" name="' . $piatto . '">0</a>
-                        <span>di ' . ucfirst($piatto) . '</span>
+                        <span>' . preg_replace('/\_/', ' ', ucfirst($piatto)) . '</span>
                       </div>';
                 echo '<div class="flexJustifyCenter">
                         <p class="prezzo">0</p>
@@ -73,7 +75,7 @@
             ?>
 
             <!--
-            <div class="container bevande">
+            <div class="card bevande">
 
                 <div class="image">
                     <img src="../assets/vino.jpg">

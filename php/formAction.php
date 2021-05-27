@@ -1,54 +1,96 @@
 <?php
 
+function redirect($url)
+{
+    echo '<script>window.location.replace("' . $url . '");</script>';
+}
+
 include_once('partials/dbconnection.php');
 include_once('partials/favicon.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $sql = "SELECT DISTINCT nomePiatto FROM piatto ORDER BY nomePiatto DESC";
+    $pagina = $_POST['pagina'];
+
+    $sql = "SELECT DISTINCT replace(nomePiatto,' ', '_') as piatto, tipo, prezzo 
+            FROM piatto
+            WHERE tipo = '$pagina'";
 
     if (!($result = $conn->query($sql))) {
         die("<script>alert('query non riuscita')</script>");
     }
 
+    //* data schema
+    /*
+    $ORDINE = [
+        ["tipo" => "bevande", "nome"=>"acqua",     "qta"=>"5", "prezzo"=>"2"],
+        ["tipo" => "bevande", "nome"=>"vino",      "qta"=>"3", "prezzo"=>"5"],
+        ["tipo" => "primi",   "nome"=>"carbonara", "qta"=>"1", "prezzo"=>"7"]
+    ];
+    
+    */
+
+    //* COLLECTING DATA...
+    if (!isset($ORDINE)) {
+        $ORDINE = [];
+    }
+
+    $i = 0;
     while ($row = $result->fetch_assoc()) {
 
-        $piatto = $row['nomePiatto'];
+        $piatto = $row['piatto'];
 
-        //printing dish numbers
-        echo "<script>console.log('" . $piatto . " n:" . $_POST[$piatto] . "')</script>";
+        $ORDINE[$i] =  [
+            "tipo" => $_POST['pagina'],
+            "nome" => $piatto,
+            "quantita" => $_POST[$piatto],
+            "prezzo" => $row['prezzo']
+        ];
 
-        //*store data
-        if (!isset($arrData)) {
-            $arrData = [];
-        }
-        $arrData[] = $piatto; //push
+        echo "<script>console.log('" . $_POST[$piatto] . " => " . $piatto . "')</script>";
+        $i++;
     }
+    $i = 0;
 
+    //print_r($ORDINE);
 
-
-
-    //*redirect
-    function redirect($url)
-    {
-        echo '<script>window.location.replace("' . $url . '");</script>';
-    }
-
-    switch ($_POST["pagina"]) {
+    switch ($pagina) {
         case 'bevande':
+
             redirect('primi.php');
             break;
 
         case 'primi':
+
             redirect('secondi.php');
             break;
 
         case 'secondi':
+
             redirect('dessert.php');
             break;
 
         case 'dessert':
-            redirect('order.php');
+
+
+            //* la pagina order.php poi si occupa di mostrare il summary di cosa si ha scelto (ed eventualmente modificarlo???)
+            //* premuto un button si invia l'order al database nella tabella ordine
+            //* il cuoco, tramite ajax *ಠ_ಠ* si vede aggiornare la lista degli ordini in real-time 
+
+            //* scorro l'array ORDINE e rimetto gli spazi dove ci sono gli underscore
+            for ($i = 0; $i < sizeof($ORDINE); $i++) {
+                foreach ($ORDINE[$i] as $key => $value) {
+                    if ($key == 'nome') {
+                        $value = preg_replace('/\_/', ' ', $value);
+                    }
+                }
+            }
+
+            //*replace underscores with whitespaces
+            $piatto = preg_replace('/\_+/', ' ', $piatto);
+            echo "<p>senza underscore: $piatto </p>";
+
+            //redirect('summary.php');
             break;
 
         default:
@@ -58,7 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $conn->close();
+} else {
+    echo "<br>Something is rotten in <s>in the state of denmark</s> my webapp<br>";
 }
 
 ?>
-<!-- <a style="display: block;" href="bevande.php">indietro</a> -->
+<!-- <a style="display: block;" href="menu">indietro</a> -->

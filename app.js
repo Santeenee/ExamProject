@@ -1,21 +1,22 @@
 const sub = document.querySelectorAll(".sub");
 const add = document.querySelectorAll(".add");
 const counterSpan = document.querySelectorAll(".counter");
-const containerDiv = document.querySelectorAll(".container");
+const cardDiv = document.querySelectorAll(".card");
 const prezzoSpan = document.querySelectorAll(".prezzo");
-const prezzoAlLitro = document.querySelectorAll(".prezzoInit");
+const prezzoAllUnita = document.querySelectorAll(".prezzoInit");
 let count = [];
 
 //* add and subtract count(er) handler
 // it works ONLY if there is an equal number of add and sub buttons (and counters)
 for (let i = 0; i < sub.length; i++) {
   count[i] = 0;
-  let prezzoAlMezzoLitro = parseFloat(prezzoAlLitro[i].innerHTML) / 2;
+  //let prezzoComodo = parseFloat(prezzoAllUnita[i].innerHTML); /* / 2*/
 
   let dishName = counterSpan[i].name;
+  //alert(dishName);
   let hiddenTag = `<input type="hidden" name="${dishName}" class="hidden-input${i}" value="0">`;
 
-  containerDiv[i].insertAdjacentHTML("beforeend", hiddenTag);
+  cardDiv[i].insertAdjacentHTML("beforeend", hiddenTag);
 
   let hiddenInput = document.querySelector(`.hidden-input${i}`);
 
@@ -29,7 +30,8 @@ for (let i = 0; i < sub.length; i++) {
     hiddenInput.value = count[i];
     if (prezzoSpan[i].innerHTML > 0) {
       prezzoSpan[i].innerHTML =
-        parseFloat(prezzoSpan[i].innerHTML) - parseFloat(prezzoAlMezzoLitro);
+        parseFloat(prezzoSpan[i].innerHTML) -
+        parseFloat(prezzoAllUnita[i].innerHTML);
     }
   });
 
@@ -40,7 +42,8 @@ for (let i = 0; i < sub.length; i++) {
     counterSpan[i].innerHTML = count[i];
     hiddenInput.value = count[i];
     prezzoSpan[i].innerHTML =
-      parseFloat(prezzoSpan[i].innerHTML) + parseFloat(prezzoAlMezzoLitro);
+      parseFloat(prezzoSpan[i].innerHTML) +
+      parseFloat(prezzoAllUnita[i].innerHTML);
   });
 }
 
