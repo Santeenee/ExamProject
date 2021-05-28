@@ -20,11 +20,17 @@
         <input type="checkbox" class="nav-toggle" id="nav-toggle" />
         <nav>
             <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php" class="current-page">Home</a></li>
                 <li><a href="php/bevande.php">Bevande</a></li>
                 <li><a href="php/primi.php">Primi</a></li>
                 <li><a href="php/secondi.php">Secondi</a></li>
                 <li><a href="php/dessert.php">Dessert</a></li>
+                <li>
+                    <form action="formAction.php" method="post">
+                        <input type="hidden" name="pagina" value="summary">
+                        <button class="current-page" type="submit">Summary</button>
+                    </form>
+                </li>
             </ul>
         </nav>
         <label for="nav-toggle" class="nav-toggle-label">

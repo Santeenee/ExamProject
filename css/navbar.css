@@ -112,17 +112,25 @@ nav li {
   margin: 0 0 1em 1em;
 }
 
-nav a {
+nav a, nav button {
   color: white;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.2rem;  
   text-transform: uppercase;
   opacity: 0;
   transition: opacity 150ms ease-in-out;
 }
 
+nav button {
+  font-family: 'Montserrat', sans-serif;
+  background: none;
+  border: none;
+}
+
 nav a:hover,
-nav a:focus {
+nav a:focus,
+nav button:hover,
+nav button:focus {
   color: black;
 }
 
@@ -130,7 +138,8 @@ nav a:focus {
   transform: scale(1, 1);
 }
 
-.nav-toggle:checked ~ nav a {
+.nav-toggle:checked ~ nav a, 
+.nav-toggle:checked ~ nav button {
   opacity: 1;
   transition: opacity 250ms ease-in-out 250ms;
 }
@@ -177,12 +186,13 @@ nav a:focus {
     margin: 0 0 0 3em;
   }
 
-  nav a {
+  nav a, nav button {
     opacity: 1;
     position: relative;
   }
 
-  nav a::before {
+  nav a::before,
+  nav button::before {
     content: "";
     display: block;
     height: 5px;
@@ -197,7 +207,9 @@ nav a:focus {
   }
 
   nav a:hover::before,
-  nav a:focus::before {
+  nav a:focus::before,
+  nav button:hover::before,
+  nav button:focus::before {
     transform: scale(1, 1);
   }
 }
