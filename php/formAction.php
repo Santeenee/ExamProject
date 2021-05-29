@@ -9,15 +9,10 @@ include_once('partials/dbconnection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$pagina = $_POST['pagina'];
-
-	$sql = "SELECT DISTINCT replace(nomePiatto,' ', '_') as piatto, tipo, prezzo
-					FROM piatto
-					WHERE tipo = '$pagina'";
+	$sql = "SELECT DISTINCT replace(nomePiatto,' ', '_') as piatto, tipo, unita, disponibilita, prezzo FROM piatto WHERE tipo = '$pagina'";
 
 	if (!($result = $conn->query($sql))) {
-		die("<script>
-					alert('query non riuscita')
-				</script>");
+		die("<script>alert('query non riuscita')/script>");
 	}
 
 	//* data schema
@@ -29,39 +24,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	];
 	*/
 
+	//* COLLECT and ORGANIZE DATA
 
+	$ORDINE = [];
 	if (!isset($_COOKIE["ORDINEcookie"])) {
-		$ORDINE = [];
+
 		$countPiatti = 0;
 	} else {
-		echo $data . "<br><br>";
-		print_r($data);
+
 		$data = json_decode($_COOKIE['ORDINEcookie'], true);
+		$countPiatti = sizeof($data);
+
+		echo "<br>ORDINEcookie:<br><br>";
+		print_r($data);
 	}
 
-	//* COLLECTING DATA...
 	while ($row = $result->fetch_assoc()) {
-		$piatto = $row['piatto'];
+		if ($row['disponibilita'] == 1) {
+			$piatto = $row['piatto'];
+			echo '<script>console.log("' . $countPiatti . '")</script>';
 
-		echo "<script>console.log('$countPiatti')</script>";
+			$ORDINE[$countPiatti] = [
+				"tipo" => $_POST['pagina'],
+				"nome" => $piatto,
+				"quantita" => $_POST[$piatto],
+				"prezzo" => $row['prezzo']
+			];
+			setcookie('ORDINEcookie', json_encode($ORDINE), time() + 3600, '/');
+			echo "<script>console.log(' $_POST[$piatto] => $piatto ')</script>";
 
-		$ORDINE[$countPiatti] = [
-			"tipo" => $_POST['pagina'],
-			"nome" => $piatto,
-			"quantita" => $_POST[$piatto],
-			"prezzo" => $row['prezzo']
-		];
-
-		echo "<script>
-						console.log(' $_POST[$piatto]  =>  $piatto ')
-					</script>";
-
-		$countPiatti++;
+			$countPiatti++;
+		}
 	}
-	setcookie('ORDINEcookie', json_encode($ORDINE), time() + 3600, '../');
-	//$data = json_decode($_COOKIE['ORDINEcookie'], true);
-
-	//print_r($data);
 
 	switch ($pagina) {
 		case 'bevande':
@@ -91,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		default:
 
-			redirect('../index.php');
+			//redirect('../index.php');
 			break;
 	}
 

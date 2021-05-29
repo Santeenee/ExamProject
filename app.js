@@ -1,5 +1,6 @@
 const sub = document.querySelectorAll(".sub");
 const add = document.querySelectorAll(".add");
+
 const counterSpan = document.querySelectorAll(".counter");
 const cardDiv = document.querySelectorAll(".card");
 const prezzoSpan = document.querySelectorAll(".prezzo");

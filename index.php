@@ -28,7 +28,7 @@
                 <li>
                     <form action="formAction.php" method="post">
                         <input type="hidden" name="pagina" value="summary">
-                        <button class="current-page" type="submit">Summary</button>
+                        <button type="submit">Summary</button>
                     </form>
                 </li>
             </ul>
