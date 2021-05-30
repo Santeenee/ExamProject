@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 		$piatto = $row['piatto'];
 
-		if ($row['disponibilita'] == 1) {
+		if ($row['disponibilita'] > 0 && $_POST[$piatto] > 0) {
 
 			echo '<script>console.log("' . $countPiatti . '")</script>';
 
@@ -50,16 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			echo "<script>console.log(' $_POST[$piatto] => $piatto ')</script>";
 			$countPiatti++;
-		} else {
-			//echo "<script>alert('" . preg_replace('/\_/', ' ', $piatto) . " non è disponibile per mancanza di ingredienti...')</script>";
-		}
+		}/* else {
+			echo "<script>console.log('" . ucfirst(preg_replace('/\_/', ' ', $piatto)) . " non è disponibile o non è stato scelto.')</script>";
+		}*/
 	}
 
-	//***************
-	//*  FIX THIS
-	//***************
-
-	//* GET DISHES FROM PREVIOUS PAGES BUT NOT LAST PAGE
 	if (isset($_COOKIE['ORDINEcookie'])) {
 
 		$data = array_merge(json_decode($_COOKIE['ORDINEcookie'], true), $ORDINE);
@@ -67,10 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$data = $ORDINE;
 	}
 
-	//array_values($data);
-
-	echo "<br>cookie:<br><br>";
-	print("<pre>" . print_r($data, true) . "</pre>");
+	echo "<br>cookie:<br>";
+	//pretty print array $data
+	echo "<pre>" . print_r($data, true) . "</pre>";
 
 	setcookie('ORDINEcookie', json_encode($data), time() + 3600, '/');
 
@@ -90,14 +84,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			redirect('dessert.php');
 			break;
 
-		case 'dessert':
+		case 'dessert' || 'summary':
 
 			redirect('summary.php');
-			break;
-
-		case 'summary':
-
-			include('summary.php');
 			break;
 
 		default:

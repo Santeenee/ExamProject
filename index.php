@@ -26,7 +26,7 @@
                 <li><a href="php/secondi.php">Secondi</a></li>
                 <li><a href="php/dessert.php">Dessert</a></li>
                 <li>
-                    <form action="formAction.php" method="post">
+                    <form action="php/formAction.php" method="post">
                         <input type="hidden" name="pagina" value="summary">
                         <button type="submit">Summary</button>
                     </form>

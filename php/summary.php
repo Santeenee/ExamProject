@@ -42,7 +42,8 @@
     <div class="card summary-card">
 
       <?php
-      if (isset($_COOKIE['ORDINEcookie'])) {
+      $temp = [];
+      if (isset($_COOKIE['ORDINEcookie']) && $_COOKIE['ORDINEcookie'] != $temp) {
 
         echo '<h1>Riepilogo ordine</h1>';
 
@@ -59,7 +60,7 @@
 
                   if ($i == 0) {
                     echo "<h3 class=\"tipo-title\">" . ucfirst($value) . "</h3>";
-                  } else if ($value != $data[($i - 1)]['tipo']) {
+                  } else if ($i != 0 && $value != $data[($i - 1)]['tipo']) {
                     echo "<h3 class=\"tipo-title\">" . ucfirst($value) . "</h3>"; //"Primi", "Secondi", ecc...
                   }
                   break;
@@ -74,7 +75,7 @@
                   break;
 
                 case 'unita':
-                  if (!($value == '' || $value == null)) {
+                  if ($value != '' || $value != null) {
                     echo '<span class="unita-summary">' . $value . '</span>';
                   }
                   break;
@@ -85,18 +86,21 @@
                   break;
 
                 default:
-                  //echo '<br><span>' . $key . ' -> ' . $value . '</span><br>';
+                  echo '<script>alert("code has to be changed.. new key-value pair added to $ORDINE[]")</script>';
                   break;
               }
             }
           }
         }
 
-        echo "<div class=\"space-between div-tot-costo\"><h3>Totale</h3><h4 class=\"tot-costo\">" . $totCosto . "€</h4></div>";
+        echo "<div class=\"space-between div-tot-costo\">
+                <h3>Totale</h3>
+                <h4 class=\"tot-costo\">" . $totCosto . "€</h4>
+              </div>";
 
         echo '<button type="button" class="betweenPages avanti al-cuoco" style="margin: 0;">invia al cuoco</button>';
       } else {
-        echo "<p>Niente da vedere qui...</p><br>";
+        echo "<p>non hai ancora scelto niente...</p><br>";
         echo '<a href="../index.php" class="betweenPages torna-home">Ordina qualcosa!</a>';
       }
 
