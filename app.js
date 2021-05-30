@@ -48,21 +48,47 @@ for (let i = 0; i < sub.length; i++) {
   });
 }
 
-/*
+/*document
+  .querySelector(".card")
+  .insertAdjacentHTML(
+    "beforeend",
+    '<a class="delete-cookies betweenPages torna-home" style="cursor: pointer;">DELETE ALL COOKIES</a>'
+  );
+
+let deleteCookiesLink = document.querySelector(".delete-cookies");
+
+deleteCookiesLink.addEventListener("click", () => {
+  deleteAllCookies();
+});
+
 function setCookie(name, value, expirydays) {
   var d = new Date();
-  d.setTime(d.getTime() + expirydays * 24 * 60 * 60 * 1000);
+  d.setTime(d.getTime() - expirydays * 24 * 60 * 60 * 1000);
   var expires = "expires=" + d.toUTCString();
   document.cookie = name + "=" + value + ";-1";
 }
 
 function deleteCookie(name) {
-  setCookie(name, "0", -1);
+  setCookie(name, "0", -3600);
 }
 
 function deleteAllCookies() {
   var cookies = document.cookie.split(";");
-  for (var i = 0; i < cookies.length; i++)
+
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    var eqPos = cookie.indexOf("=");
+    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+}
+
+function deleteertAllCookies() {
+  var cookies = document.cookie.split(";");
+  alert(cookies);
+  for (var i = 0; i < cookies.length; i++) {
     deleteCookie(cookies[i].split("=")[0]);
+    alert("hei [" + cookies[i].split("=")[0] + "] hei");
+  }
 }
 */

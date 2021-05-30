@@ -8,7 +8,9 @@ function redirect($url)
 include_once('partials/dbconnection.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 	$pagina = $_POST['pagina'];
+
 	$sql = "SELECT DISTINCT replace(nomePiatto,' ', '_') as piatto, tipo, unita, disponibilita, prezzo FROM piatto WHERE tipo = '$pagina'";
 
 	if (!($result = $conn->query($sql))) {
@@ -25,73 +27,88 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	*/
 
 	//* COLLECT and ORGANIZE DATA
-
+	//setting initial values
 	$ORDINE = [];
-	if (!isset($_COOKIE["ORDINEcookie"])) {
-
-		$countPiatti = 0;
-	} else {
-
-		$data = json_decode($_COOKIE['ORDINEcookie'], true);
-		$countPiatti = sizeof($data);
-
-		echo "<br>ORDINEcookie:<br><br>";
-		print_r($data);
-	}
+	$countPiatti = 0;
 
 	while ($row = $result->fetch_assoc()) {
+
+		$piatto = $row['piatto'];
+
 		if ($row['disponibilita'] == 1) {
-			$piatto = $row['piatto'];
+
 			echo '<script>console.log("' . $countPiatti . '")</script>';
 
+			//* GET DISHES FROM LAST PAGE
 			$ORDINE[$countPiatti] = [
 				"tipo" => $_POST['pagina'],
-				"nome" => $piatto,
 				"quantita" => $_POST[$piatto],
+				"nome" => $piatto,
+				"unita" => $row['unita'],
 				"prezzo" => $row['prezzo']
 			];
-			setcookie('ORDINEcookie', json_encode($ORDINE), time() + 3600, '/');
-			echo "<script>console.log(' $_POST[$piatto] => $piatto ')</script>";
 
+			echo "<script>console.log(' $_POST[$piatto] => $piatto ')</script>";
 			$countPiatti++;
+		} else {
+			//echo "<script>alert('" . preg_replace('/\_/', ' ', $piatto) . " non è disponibile per mancanza di ingredienti...')</script>";
 		}
 	}
+
+	//***************
+	//*  FIX THIS
+	//***************
+
+	//* GET DISHES FROM PREVIOUS PAGES BUT NOT LAST PAGE
+	if (isset($_COOKIE['ORDINEcookie'])) {
+
+		$data = array_merge(json_decode($_COOKIE['ORDINEcookie'], true), $ORDINE);
+	} else {
+		$data = $ORDINE;
+	}
+
+	//array_values($data);
+
+	echo "<br>cookie:<br><br>";
+	print("<pre>" . print_r($data, true) . "</pre>");
+
+	setcookie('ORDINEcookie', json_encode($data), time() + 3600, '/');
 
 	switch ($pagina) {
 		case 'bevande':
 
-			//redirect('primi.php');
+			redirect('primi.php');
 			break;
 
 		case 'primi':
 
-			//redirect('secondi.php');
+			redirect('secondi.php');
 			break;
 
 		case 'secondi':
 
-			//redirect('dessert.php');
+			redirect('dessert.php');
 			break;
 
 		case 'dessert':
 
-			include('partials/summary.php');
+			redirect('summary.php');
 			break;
 
 		case 'summary':
 
-			include('partials/summary.php');
+			include('summary.php');
 			break;
 
 		default:
 
-			//redirect('../index.php');
+			redirect('../index.php');
 			break;
 	}
 
 	$conn->close();
 } else {
-	echo '<h1>Something is rotten in <s>the state of denmark</s> my webapp</h1>';
+	echo '<h1>Something is rotten in <s>the state of denmark</s> my webapp<br><br>There\'s no POST request...</h1>';
 }
 
 ?>

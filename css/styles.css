@@ -52,6 +52,7 @@ button {
 }
 
 .betweenPages {
+  font-family: 'Montserrat', sans-serif;
   display: inline-flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -168,6 +169,71 @@ button {
   }
 }
 
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  margin-bottom: 0.4em;
+}
+
+.space-between > * {
+  flex: 1 1 0;
+}
+
+.tipo-title {
+  margin: 1.3em 0 0.5em 0;
+}
+
+.quantita {
+  text-align: center;
+  padding: 0.2em 0.3em;
+  background-color: coral;
+  border-radius: 6px;
+  order: 0;
+  flex: 1 1 30px;
+  min-width: 30px;
+  margin-right: 0.5em;
+}
+
+.nome {
+  white-space: nowrap;
+  text-align: left;
+  order: 2;
+  flex: 99 99 10em;
+}
+
+.unita-summary {
+  font-family: 'Italianno', cursive;
+  font-weight: 600;
+  font-size: 1.4em;
+  text-align: left;
+  order: 1;
+  flex: 1 1 0;
+  margin-right: 0.5em;
+}
+
+.prezzo-summary {
+  text-align: right;
+  order: 3;
+  margin-left: 1em;
+  flex: 1 1 40px;
+  min-width: 40px;
+}
+
+.tot-costo {
+  text-align: right;
+}
+
+.div-tot-costo {
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+}
+
+.div-tot-costo > h3 {
+  color: hsl(var(--hue2) 100% 50%);
+}
+
 .flexJustifyCenter {
   width: 100%;
   display: flex;
@@ -191,18 +257,6 @@ button {
   font-weight: bold;
 }
 
-/*.prezzoInit::before {
-  content: "(";
-}
-
-.prezzoInit::after {
-  content: "\20AC  al piatto)";
-}
-
-.bevande .prezzoInit::after {
-  content: "\20AC  al litro)";
-}*/
-
 .prezzo::after {
   content: "\20AC";
 }
@@ -219,9 +273,10 @@ main h2 span {
   border-bottom: 2px solid black;
 }
 
+
 .card {
   min-width: 280px;
-  max-width: 500px;
+  max-width: 550px;
   border: none;
   border-radius: calc(var(--radius) + 5px);
   padding: 1em;
@@ -230,6 +285,10 @@ main h2 span {
   background: hsl(0 0% 50% / 0.15);
 
   box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.16), 0 2px 10px hsla(0, 0%, 0%, 0.12);
+}
+
+.summary-card {
+  max-width: 1000px;
 }
 
 .card a {
