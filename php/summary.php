@@ -42,6 +42,9 @@
     <div class="card summary-card">
 
       <?php
+
+      //banner comment
+
       $temp = [];
       if (isset($_COOKIE['ORDINEcookie']) && $_COOKIE['ORDINEcookie'] != $temp) {
 
