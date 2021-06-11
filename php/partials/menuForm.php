@@ -1,7 +1,7 @@
 <form action="formAction.php" method="post">
   <?php
   echo '<input type="hidden" name="pagina" value="' . $page . '">';
-  echo '<p style="margin: 0 1em 1em 1em; text-align: center;">Per confermare le tue scelte fai tap sul pulsante "avanti"</p>';
+  //echo '<p style="margin: 0 1em 1em 1em; text-align: center;">Per confermare le tue scelte fai tap sul pulsante "avanti"</p>';
   ?>
 
   <?php

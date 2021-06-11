@@ -101,7 +101,7 @@
                 <h4 class=\"tot-costo\">" . $totCosto . "€</h4>
               </div>";
 
-        echo '<button type="button" class="betweenPages avanti al-cuoco" style="margin: 0;">invia al cuoco</button>';
+        echo '<button type="button" class="betweenPages avanti al-cuoco" style="margin: 0;">Ordina</button>';
       } else {
         echo "<p>non hai ancora scelto niente...</p><br>";
         echo '<a href="../index.php" class="betweenPages torna-home">Ordina qualcosa!</a>';
